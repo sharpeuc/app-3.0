@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Archivos Excel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Archivos Excel</h1>
+        <form id="generate-form">
+            <label for="fileCount">Cantidad de archivos a generar:</label>
+            <input type="number" id="fileCount" name="fileCount" required>
+
+            <label for="rowsPerFile">Cantidad de filas por archivo:</label>
+            <input type="number" id="rowsPerFile" name="rowsPerFile" required>
+
+            <label for="fileNameBase">Nombre base del archivo:</label>
+            <input type="text" id="fileNameBase" name="fileNameBase" required>
+
+            <label for="changingValueBase">Valor base para columna 9:</label>
+            <input type="text" id="changingValueBase" name="changingValueBase" required>
+
+            <button type="submit">Generar Archivos</button>
+        </form>
+
+        <div id="output"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
