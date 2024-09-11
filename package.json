@@ -1,16 +1,11 @@
 {
   "name": "app-generador",
   "version": "1.0.0",
-  "main": "script.js",
+  "bin": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "app.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "express": "^4.20.0",
     "prompt-sync": "^4.2.0",
     "xlsx": "^0.18.5"
   }
