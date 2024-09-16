@@ -1,13 +1,12 @@
 const express = require('express');
 const fs = require('fs');
 const XLSX = require('xlsx');
-const path = require('path');
 const archiver = require('archiver');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
 
-// Middleware para servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 
@@ -67,27 +66,8 @@ function generateExcelFiles(basePath, fileCount, rowsPerFile, fileNameBase, chan
         fileNumber++;
     }
 
-    // Escribir las rutas en el archivo CSV
     fs.writeFileSync(csvFilePath, filePaths.join('\n'), 'utf8');
     console.log(`...El archivo CSV ha sido creado exitosamente en ${csvFilePath}`);
-}
-
-function zipFiles(basePath, zipPath) {
-    const output = fs.createWriteStream(zipPath);
-    const archive = archiver('zip', { zlib: { level: 9 } });
-
-    output.on('close', function() {
-        console.log(`...El archivo ZIP ha sido creado exitosamente en ${zipPath}`);
-    });
-
-    archive.pipe(output);
-
-    const files = fs.readdirSync(basePath).filter(file => file.endsWith('.xlsx'));
-    files.forEach(file => {
-        archive.file(path.join(basePath, file), { name: file });
-    });
-
-    archive.finalize();
 }
 
 app.post('/generate', (req, res) => {
@@ -99,18 +79,32 @@ app.post('/generate', (req, res) => {
     res.json({ success: true });
 });
 
-app.post('/download-zip', (req, res) => {
+app.get('/download-zip', (req, res) => {
     const basePath = path.join('C:/archivos');
-    const zipPath = path.join(basePath, 'files.zip');
+    const zipFileName = 'files.zip';
 
-    zipFiles(basePath, zipPath);
+    res.setHeader('Content-Disposition', `attachment; filename=${zipFileName}`);
+    res.setHeader('Content-Type', 'application/zip');
 
-    res.download(zipPath, 'files.zip', (err) => {
-        if (err) {
-            console.error('Error al descargar el archivo ZIP:', err);
-            res.status(500).send('Error al descargar el archivo ZIP.');
+    const archive = archiver('zip', {
+        zlib: { level: 9 } // Mayor nivel de compresión
+    });
+
+    archive.on('error', (err) => {
+        throw err;
+    });
+
+    archive.pipe(res);
+
+    // Añade todos los archivos XLSX al archivo ZIP
+    fs.readdirSync(basePath).forEach(file => {
+        if (file.endsWith('.xlsx')) {
+            const filePath = path.join(basePath, file);
+            archive.file(filePath, { name: file });
         }
     });
+
+    archive.finalize();
 });
 
 app.listen(PORT, () => {
