@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const XLSX = require('xlsx');
 const path = require('path');
+const archiver = require('archiver');
 
 const app = express();
 const PORT = 3000;
@@ -66,8 +67,27 @@ function generateExcelFiles(basePath, fileCount, rowsPerFile, fileNameBase, chan
         fileNumber++;
     }
 
+    // Escribir las rutas en el archivo CSV
     fs.writeFileSync(csvFilePath, filePaths.join('\n'), 'utf8');
     console.log(`...El archivo CSV ha sido creado exitosamente en ${csvFilePath}`);
+}
+
+function zipFiles(basePath, zipPath) {
+    const output = fs.createWriteStream(zipPath);
+    const archive = archiver('zip', { zlib: { level: 9 } });
+
+    output.on('close', function() {
+        console.log(`...El archivo ZIP ha sido creado exitosamente en ${zipPath}`);
+    });
+
+    archive.pipe(output);
+
+    const files = fs.readdirSync(basePath).filter(file => file.endsWith('.xlsx'));
+    files.forEach(file => {
+        archive.file(path.join(basePath, file), { name: file });
+    });
+
+    archive.finalize();
 }
 
 app.post('/generate', (req, res) => {
@@ -77,6 +97,20 @@ app.post('/generate', (req, res) => {
     generateExcelFiles(basePath, fileCount, rowsPerFile, fileNameBase, changingValueBase);
 
     res.json({ success: true });
+});
+
+app.post('/download-zip', (req, res) => {
+    const basePath = path.join('C:/archivos');
+    const zipPath = path.join(basePath, 'files.zip');
+
+    zipFiles(basePath, zipPath);
+
+    res.download(zipPath, 'files.zip', (err) => {
+        if (err) {
+            console.error('Error al descargar el archivo ZIP:', err);
+            res.status(500).send('Error al descargar el archivo ZIP.');
+        }
+    });
 });
 
 app.listen(PORT, () => {

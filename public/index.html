@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Archivos Excel</title>
+    <title>Generador de Archivos Excel y ZIP</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Generador de Archivos Excel</h1>
-        <form id="generate-form">
+        <h1>Generador de Archivos Excel y ZIP</h1>
+
+        <!-- Formulario para generar archivos Excel -->
+        <form id="generate-files-form">
             <label for="fileCount">Cantidad de archivos a generar:</label>
             <input type="number" id="fileCount" name="fileCount" required>
 
@@ -22,7 +24,12 @@
             <label for="changingValueBase">Valor base para columna 9:</label>
             <input type="text" id="changingValueBase" name="changingValueBase" required>
 
-            <button type="submit">Generar Archivos</button>
+            <button type="submit" id="generate-files">Generar Archivos</button>
+        </form>
+
+        <!-- Formulario para descargar el ZIP -->
+        <form id="download-zip-form">
+            <button type="submit" id="download-zip">Descargar ZIP</button>
         </form>
 
         <div id="output"></div>

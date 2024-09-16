@@ -1,4 +1,4 @@
-document.getElementById('generate-form').addEventListener('submit', async function(e) {
+document.getElementById('generate-files-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const fileCount = document.getElementById('fileCount').value;
@@ -21,4 +21,23 @@ document.getElementById('generate-form').addEventListener('submit', async functi
     } else {
         output.textContent = 'Hubo un error al generar los archivos.';
     }
+});
+
+document.getElementById('download-zip-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    fetch('/download-zip')
+        .then(response => response.blob())
+        .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'files.zip';
+            document.body.appendChild(a);
+            a.click();
+            URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Error al descargar el ZIP:', error);
+        });
 });
