@@ -4,7 +4,7 @@ se levanta el backend: cd backend -> node app.js
 se levanta el front http://localhost:3000/
 
 # Dependencias y librerías en el backend
-npm install express
-npm install xlsx
-npm install archiver
+1. npm install express
+2. npm install xlsx
+3. npm install archiver
 
