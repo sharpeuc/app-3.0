@@ -8,3 +8,7 @@
 2. npm install xlsx
 3. npm install archiver
 
+# Ruta archivos xlsx
+1. Se debe crear ruta C:/archivos, donde se guardarán los archivos xlsx generados
+2. Dentro del backend se puede establecer una nueva ruta para poder guardar los archivos xlsx
+
