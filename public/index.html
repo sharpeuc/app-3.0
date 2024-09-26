@@ -3,38 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Archivos Excel y ZIP</title>
+    <title>Mi Aplicación</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Generador de Archivos Excel y ZIP</h1>
-
-        <!-- Formulario para generar archivos Excel -->
-        <form id="generate-files-form">
-            <label for="fileCount">Cantidad de archivos a generar:</label>
-            <input type="number" id="fileCount" name="fileCount" required>
-
-            <label for="rowsPerFile">Cantidad de filas por archivo:</label>
-            <input type="number" id="rowsPerFile" name="rowsPerFile" required>
-
-            <label for="fileNameBase">Nombre base del archivo:</label>
-            <input type="text" id="fileNameBase" name="fileNameBase" required>
-
-            <label for="changingValueBase">Valor base para columna 9:</label>
-            <input type="text" id="changingValueBase" name="changingValueBase" required>
-
-            <button type="submit" id="generate-files">Generar Archivos</button>
-        </form>
-
-        <!-- Formulario para descargar el ZIP -->
-        <form id="download-zip-form">
-            <button type="submit" id="download-zip">Descargar ZIP</button>
-        </form>
-
-        <div id="output"></div>
-    </div>
-
+    <header>
+        <h1>Mi Aplicación</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#" id="configuracionBtn">Configuración</a></li>
+                <li><a href="#" id="historialArchivosBtn">Historial de Archivos</a></li>
+                <li><a href="#" id="ayudaBtn">Ayuda</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Generador de Archivos XLSX</h2>
+        <input type="number" id="fileCount" placeholder="Cantidad de Archivos" required>
+        <input type="number" id="rowsPerFile" placeholder="Filas por Archivo" required>
+        <input type="text" id="fileNameBase" placeholder="Base del Nombre del Archivo" required>
+        <input type="text" id="changingValueBase" placeholder="Valor Cambiante Base" required>
+        <button id="generateButton">Generar Archivos</button>
+        <button id="zipButton">Descargar ZIP</button>
+    </main>
+    <footer>
+        <p>&copy; 2024 Mi Aplicación. Todos los derechos reservados.</p>
+    </footer>
     <script src="script.js"></script>
-</body>
+    <script>
+        // Manejar el evento click para descargar el historial de archivos
+        document.getElementById('historialArchivosBtn').addEventListener('click', () => {
+            window.location.href = '/api/historial-archivos'; // Ruta corregida
+        });
+
+        // Manejar el evento click para redirigir a la configuración  
+        document.getElementById('configuracionBtn').addEventListener('click', (event) => {  
+            event.preventDefault();   
+            window.location.href = 'configuracion.html';  
+        });  
+    </script>
+</body>  
 </html>
+

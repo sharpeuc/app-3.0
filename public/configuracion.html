@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustes de la Aplicación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+        }
+        select, button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .checkbox-container {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajustes de la Aplicación</h1>
+
+    <!-- Preferencias de usuario -->
+    <h2>Preferencias de Usuario</h2>
+    <label for="themeSelect">Tema:</label>
+    <select id="themeSelect">
+        <option value="light">Claro</option>
+        <option value="dark">Oscuro</option>
+    </select>
+
+    <!-- Configuración de archivos -->
+    <h2>Configuración de Archivos</h2>
+    <label for="fileFormatSelect">Formato de archivo:</label>
+    <select id="fileFormatSelect">
+        <option value="xlsx">XLSX</option>
+        <option value="csv">CSV</option>
+        <option value="pdf">PDF</option>
+    </select>
+
+    <!-- Notificaciones -->
+    <h2>Notificaciones</h2>
+    <div class="checkbox-container">
+        <label>
+            <input type="checkbox" id="notificationCheckbox"> Habilitar notificaciones
+        </label>
+    </div>
+
+    <!-- Botón para guardar cambios -->
+    <button id="saveChangesBtn">Guardar Cambios</button>
+</body>
+</html>
+</main>
+<p><a href="index.html">Volver a Inicio</a></p>  
+</main>  
+<footer>  
+    <p>&copy; 2024 Mi Aplicación</p>  
+</footer>  
