@@ -1,6 +1,6 @@
-# App Generador de archivos 2.0
+# App Generador de archivos 3.0
 1. App que genera datos, tecnologías usadas: nodejs, html, css
-2. se levanta el backend: cd backend -> node app.js
+2. se levanta el backend: cd backend -> node server.js
 3. se levanta el front http://localhost:3000/
 
 # Dependencias y librerías en el backend
